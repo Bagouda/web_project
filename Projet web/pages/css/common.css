@@ -1,0 +1,46 @@
+
+
+div{
+    text-align: center;
+}
+
+
+body{
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+#le_saviezVous{
+    position:absolute;
+    left:0%;
+    max-width:20%;
+    top:50%;
+
+    background :#d3a982;
+    border:dashed 3px  black;
+    border-radius:5px;
+    margin-auto;
+}
+
+
+#texte{
+    margin: 0% 22% 0%;
+    background-color: rgba(255,255,255,.4);
+    text-align: center;
+    padding: 1%;
+    color: black;
+    text-align: justify;
+    align-content: center;
+}
+
+#logo{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 4px 4px 4px #1c1a19;
+}
+

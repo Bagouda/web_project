@@ -1,0 +1,45 @@
+html{
+    background: #ece7e0;
+}
+
+#logo{
+    max-width: 100%;
+    height: auto;
+    display: block
+    box-shadow: 4px 4px 4px #1c1a19;
+    }
+
+
+div{
+    text-align: center;
+    }
+
+h1 {
+    text-align: center;
+}
+
+.centrer {
+  text-align: center;
+  margin-top: 2%;
+}
+
+
+#list_sport {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.sport {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: 300%;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10%; 
+    background-color: rgba(255,255,255,.4);
+
+
+}

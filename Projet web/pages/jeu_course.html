@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html id="main" lang="fr">
+	<head>
+	    <meta charset="utf-8" />
+	    <title>Jeu de course</title>
+	    <link rel="stylesheet" href="css/jeux_course.css" type="text/css" media="screen"/>
+	    <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen"/>
+
+	</head>
+	<body onclick="change_position()" >
+	    <header>
+			<div>
+				<a href="../index.html"><img src="image/image_accueil/banniere.png" alt="Logo" id="logo"></a>
+			</div>
+			<nav>
+				<ul class="menu">
+					<li>
+						<a href="../index.html">Accueil</a>
+					</li>
+					<li>
+						<a href="sports_old.html">Sports jeux Olympiques</a>
+					</li>
+					<li>
+						<a href="sports_paralympiques.html">Sports Paralympiques</a>
+					</li>
+					<li>
+						<a href="sports_nv.html">Nouveaux Sports jeux Olympiques</a>
+					</li>
+					<li>
+						<a href="jeu.html">Nos Jeux</a>
+					</li>
+					<li>
+						<a href="reservation.html">Réservation</a>
+					</li>
+					<li>
+						<a href="about_us.html">Contacts</a>
+					</li>
+				</ul>
+			</nav>
+	    </header>
+
+		<div id="canvas">
+			<div id ="timer">
+				<div id="timer_txt">temps écoulé :</div><div id ='timer_number'> 0 </div>
+			</div>
+			<div id = "score" >
+				<div id="score_txt">
+					position : 
+				</div>
+				<div id="score_number">
+					0
+				</div>
+			</div>
+			<img src="image/image_jeu_course/runner_0.gif" alt="runner" class="runner" id="runner_0" >
+			<img src="image/image_jeu_course/runner.gif" alt="runner" class="runner" id="runner_1" >
+			<img src="image/image_jeu_course/runner.gif" alt="runner" class="runner" id="runner_2" >
+			<img src="image/image_jeu_course/runner.gif" alt="runner" class="runner" id="runner_3" >
+			<img src="image/image_jeu_course/replay.png" alt="replay" id="replay" onclick="reinitialize()">
+
+		</div>
+		<div id="best_score">
+			<div id="best_score_txt">Meilleur temps : </div><div id="best_score_number"> 0 </div>
+		</div>
+
+		<script>
+			var canvas = document.getElementById('canvas');
+			var chrono = document.getElementById('timer_number');
+			best_score = 0;
+			var score = document.getElementById("score_number");
+			var width = canvas.offsetWidth*0.94;
+			var height = canvas.offsetHeight;
+			var runners = [];
+			var pos = [0,0,0,0];
+			var speed = [];
+			var temp = 0;
+			var pause = false;
+			var in_course = false;
+			function initialize(){
+				temp = 0;
+				chrono.innerHTML = temp;
+				console.log(speed);
+				for(let i = 0; i < 4; i ++){
+					runners.push(document.getElementById('runner_'+i));
+					runners[i].style.top = i *height/6 +height/6 + "px";
+					speed[i] =  Math.floor((Math.random() * (1.1) +6)*10)/10;
+				}
+				runners[0].style.top = height/6 +height/6 + "px";
+				runners[1].style.top =  height/6 + "px";
+
+				speed[0] = 10;
+			}
+			function change_position(){ 
+				if(pause != true){
+					if(in_course == false){
+						in_course = true;
+						begin_course();
+						
+					}
+					pos[0] += speed[0];
+					if(pos[0] > width-40){
+						pos[0] = width-40;
+						end_game();
+					}
+					runners[0].style.left = pos[0]  +"px";
+				}
+			}
+
+			function begin_course(){
+				timer = setInterval(move_other_runner, 100);
+				main.style = "background-color: black;";
+			}
+			function reinitialize(){
+				pause = true;
+				setTimeout(function(){ pause = false; }, 1000);
+				temp = 0;
+				chrono.innerHTML = temp;
+				initialize();
+				for(let i = 0; i < 4; i ++){
+					pos[i] = speed[0];
+					runners[i].style.left = speed[0]  +"px";
+				}
+				
+			}
+
+
+			function move_other_runner(){
+				if(pause != true){
+					temp += 0.1;
+					temp = Math.round(temp*10)/10;
+					chrono.innerHTML = temp;
+					let before_runner_0 = 1;
+					for(let i = 1; i < 4 ; i ++){
+
+						if(pos[i] != width- 40){
+
+							pos[i] += Math.floor(Math.random() * (4*(pos[i]/width)) +speed[i]);
+							if(pos[i] > width-40){
+								pos[i] = width-40;
+								before_runner_0 += 1;
+								
+							}
+							else
+							{
+								if( pos[i] > pos[0]){
+									before_runner_0 += 1;
+								}
+							}
+						}
+						else
+						{
+							before_runner_0 += 1;
+						}
+						runners[i].style.left = pos[i]  +"px";
+					}
+					score.innerHTML = before_runner_0;
+				}
+			}
+
+			function end_game(){
+				window.clearInterval(timer);
+				main.style = "background-color: white;";
+				if(score.innerHTML == 1){
+					let buffer = temp;
+					if( best_score > buffer || best_score == 0){
+						best_score = buffer;
+						document.getElementById("best_score_txt").innerHTML = "Vous avez battu votre record ! "
+						document.getElementById("best_score_number").innerHTML = best_score+"s";
+					}
+				}
+
+			}
+
+			initialize();
+
+
+
+		</script>
+		<footer>
+			copyright © 2021 Dalifard Rasakumaran Lauthrey, <a href="about_us.html"> à propos de nous</a>
+		</footer>
+	</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Jeux Olympiques de Tokyo 2021</title>
+        <link rel="stylesheet" href="css/reservation.css" type="text/css" media="screen"/>
+		<link rel="stylesheet" href="css/menu.css" type="text/css" media="screen"/>
+
+      </head>
+
+    <body>
+  
+         <header>
+                <div>
+                    <a href="../index.html"><img src="image/image_accueil/banniere.png" alt="Logo" id="logo"></a>
+                </div>
+                <nav>
+                    <ul class="menu">
+                        <li>
+                            <a href="../index.html">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="sports_old.html">Sports jeux Olympiques</a>
+                        </li>
+                        <li>
+                            <a href="sports_paralympiques.html">Sports Paralympiques</a>
+                        </li>
+                        <li>
+                            <a href="sports_nv.html">Nouveaux Sports jeux Olympiques</a>
+                        </li>
+                        <li>
+                            <a href="jeu.html">Nos Jeux</a>
+                        </li>
+                        <li>
+                            <a href="reservation.html">Réservation</a>
+                        </li>
+                        <li>
+                            <a href="about_us.html">Contacts</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+        <div class="center">
+            <h1>Réservation</h1>    
+        </div>
+
+       
+            <form class="main_style" name="login">
+                <div id="form_field">
+
+                    <input id="prénom" type="text" placeholder="Your first  name" name="first_name" >
+
+                    <input id="nom" type="text" placeholder="Your name" name=" name" >
+
+                    <input id="email" type="email" placeholder="Your email" name="email">
+
+                    <input id="telephone" type="tel" placeholder="Your telephone number" name="telephone">
+
+                    <input type="date" id="date" name="date">
+                
+
+                   <select name="section">
+                        <option value="Jeux Olympiques">Sports jeux Olympiques</option>
+                        <option value="Jeux Paralympiques">Jeux Paralympiques</option>
+                        <option value="Nouveaux Jeux">Nouveaux sports jeux Olympiques</option>
+                    </select>
+
+                    <select name="paiement">
+                        <option value="euros">€</option>
+                        <option value="dollars">$</option>
+                        <option value="pounds">£</option>
+                        <option value="yen">¥</option>
+                    </select>
+
+                    <br>
+                </div>
+                <div id="button_end">
+                    <button type="button" class ="deactivated" id = "add_button" onclick="add()">Add</button>
+                    <button type="button" onclick="Delete()">Remove all</button>
+                </div>
+            </form>
+        
+
+        <main class="main_style">
+            <table id="table" >
+                <tr>
+                    <td class="col_1">Prénom</td>
+                    <td class="col_2">Nom</td>
+                    <td class="col_1">E-mail</td>
+                    <td class="col_2">Téléphone</td>
+                    <td class="col_1">Date</td>
+                    <td class="col_2">Catégorie</td>
+                    <td class="col_1">Paiement</td>
+                </tr>
+
+            </table>
+
+
+        </main>
+        
+        <footer>
+            copyright © 2021 Dalifard Rasakumaran Lauthrey, <a href="about_us.html"> à propos de nous</a>
+        </footer>
+        <script>
+         
+            var button = document.getElementById("add_button");
+
+
+            
+
+            function add(){
+                
+                var form = document.forms.login;
+                var table = document.getElementById("table");
+                console.log(form.first_name.value);
+                console.log(table);
+
+                var new_row = document.createElement("tr");
+                var i;
+                var value = [form.prénom, form.nom, form.email, form.telephone, form.date, form.section, form.paiement];
+
+                if (is_valid(value) == 0){
+                    return 0;
+                }
+
+    
+
+                for(i = 0; i < value.length ; i ++)
+                {
+                    var new_col = document.createElement("td");
+                    
+                    if(i%2 == 0){
+                        new_col.classList.add("col_1");
+                    }
+                    else
+                    {
+                        new_col.classList.add("col_2");
+                    }
+                    text = document.createTextNode(value[i].value);
+                    new_col.appendChild(text);
+                    new_row.appendChild(new_col);
+
+                }
+                table.appendChild(new_row);
+                /*alert(form.first_name.value); */
+                return 1;
+            }
+
+            function is_valid(table_value)
+            {
+                if( table_value[0].value.length == 0)
+                    return 0; 
+
+                if( table_value[1].value.length == 0)
+                    return 0;
+
+                if( table_value[2].checkValidity() == false)
+                    return 0;
+
+                if( table_value[3].value.length == 0)
+                    return 0;
+
+                if( table_value[4].checkValidity() == false )
+                    return 0;
+
+
+
+                return 1;
+            }
+
+            function Delete(){
+                var table = document.getElementById("table");
+                var i;
+                var child_number = table.childElementCount;
+                for(i = 1 ; i < child_number ; i ++ ){
+                    table.removeChild(table.lastElementChild);
+                }
+            }
+
+        </script>
+        
+    </body>
+    
+</html>

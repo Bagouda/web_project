@@ -1,0 +1,82 @@
+
+html {
+
+	background-color: white;
+	width: 100%;
+
+	height: 100%;
+	display: flex;
+	flex-direction: line;
+    justify-content: center;
+    transition: 1s;
+}
+body {
+
+	width: 100%;
+
+	height: 100%;
+	color: white;
+	
+}
+footer {
+	color: black;
+}
+
+#canvas {
+	display:block;
+	margin:auto;
+	margin-top: 5%;
+	background-image: url("../image/image_jeu_arc/fond.jpg");
+	background-repeat: no-repeat;
+  	background-size: 100% 100%;
+	width: 80%;
+	height: 70%;
+	position:relative;
+
+
+
+
+}
+#score{
+	text-shadow: 1px 1px black;
+	font-size: 50px;
+	position:absolute;
+	bottom:0;
+	left: 50%;
+	text-align:center;
+
+}
+#target {
+	width:40px;
+	height: 40px;
+	position: absolute;
+}
+
+
+#best_score {
+	text-shadow: 1px 1px black;
+	margin-top: 2%;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
+	font-size: 50px;
+	display: flex;
+	flex-direction: line;
+
+}
+
+#timer {
+	text-shadow: 1px 1px black;
+	display: flex;
+	flex-direction: line;
+	font-size: 30px;
+	
+
+}
+
+#timer_number, #best_score_number {
+
+	margin-left: 2%;
+}
+
+

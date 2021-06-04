@@ -1,0 +1,36 @@
+
+#debut{
+	max-width: 100%;
+    height: auto;
+    float: center;
+    margin : auto;
+}
+
+#le_saviezVous{
+	position: : absolute;
+	left:0%;
+	max-width: 20%;
+	background :#d3a982;
+	border:dashed 3px  black;
+	border-radius:5px;
+}
+#title{
+	font-size: 300%;
+	margin-bottom: 10%;
+}
+#main_text {
+	margin: auto;
+	width:80%;
+	text-align: center;
+	background-color: rgba(255,255,255,.4);
+
+}
+
+
+
+#video{
+	justify-content: center;
+	margin-top: 2%;
+	padding-bottom: 5%;
+
+}

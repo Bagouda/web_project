@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html id="main" lang="fr">
+	<head>
+	    <meta charset="utf-8" />
+	    <title>Jeu de tir à l'arc</title>
+	    <link rel="stylesheet" href="css/jeux_arc.css" type="text/css" media="screen"/>
+	    <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen"/>
+	</head>
+	<body >
+	   	<header>
+			<div>
+				<a href="../index.html"><img src="image/image_accueil/banniere.png" alt="Logo" id="logo"></a> 
+			</div>
+			<nav>
+				<ul class="menu">
+					<li>
+						<a href="../index.html">Accueil</a>
+					</li>
+					<li>
+						<a href="sports_old.html">Sports jeux Olympiques</a>
+					</li>
+					<li>
+						<a href="sports_paralympiques.html">Sports Paralympiques</a>
+					</li>
+					<li>
+						<a href="sports_nv.html">Nouveaux Sports jeux Olympiques</a>
+					</li>
+					<li>
+						<a href="jeu.html">Nos Jeux</a>
+					</li>
+					<li>
+						<a href="reservation.html">Réservation</a>
+					</li>
+					<li>
+						<a href="about_us.html">Contacts</a>
+					</li>
+				</ul>
+			</nav>
+	    </header>
+
+		<div id="canvas">
+			<div id ="timer">
+				<div id="timer_txt">temps restant :</div><div id ='timer_number'> 10 </div>
+			</div>
+			<div id = "score" >
+				0
+			</div>
+			<img src="image/image_jeu_arc/target.png" alt="Shoot !"  id="target" onclick="change_position()">
+
+		</div>
+		<div id="best_score">
+			<div id="best_score_txt">Meilleur score : </div><div id="best_score_number"> 0 </div>
+		</div>
+
+		<script>
+			var canvas = document.getElementById('canvas');
+			var width = canvas.offsetWidth;
+			var height = canvas.offsetHeight;
+			var best_score =0;
+			var score = 0;
+			var timer;
+			var temp = document.getElementById('timer_number');
+			var is_over;
+
+			var target = document.getElementById('target');// don't go to to DOM every time you need it. Instead store in a variable and manipulate.
+			target.style.position = "absolute";
+			
+
+			function change_position(){
+				let x = Math.floor(Math.random() * (width-40));
+				let y = Math.floor(Math.random() * (height-40));
+				target.style.top = y +"px"; 
+				target.style.left = x +"px";
+				console.log(x,y);
+				if( score == 0){
+					set_timer();
+					main.style = "background-color: black;";
+				}
+				score += 1;
+				update_score(score);
+			}
+			function update_score(new_score){
+				document.getElementById('score').innerHTML = new_score;
+			}
+
+			function initialize(){
+				target.style.top = height/2-20 +"px"; 
+				target.style.left = width/2-20 +"px";
+				score = 0;
+				is_over = false;
+				temp.innerHTML = 10;
+				update_score(0);
+				document.getElementById("best_score_txt").innerHTML = "Meilleur score :";
+				let main = document.getElementById("main");
+				
+				main.classList.add("new_game");
+				
+			}
+
+			function set_timer(){
+				timer = setInterval(decrease_timer, 1000);
+
+			}
+
+			function decrease_timer(){
+				temp.innerHTML -= 1;
+				if(temp.innerHTML == 0){
+					end_game();
+				}
+
+			}
+
+			function end_game(){
+				console.log("end_game");
+				main.style = "background-color: white;";
+				window.clearInterval(timer);
+				let buffer = score;
+				initialize();
+				if( best_score < buffer){
+					best_score = buffer;
+					document.getElementById("best_score_txt").innerHTML = "Vous avez battu votre record ! "
+					document.getElementById("best_score_number").innerHTML = best_score;
+				}
+
+			}
+
+
+			initialize();
+
+
+
+		</script>
+		<footer>
+			copyright © 2021 Dalifard Rasakumaran Lauthrey, <a href="about_us.html"> à propos de nous</a>
+		</footer>
+	</body>
+
+</html>
